@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from jizhang.models import Category, Item
 
 def test_data():
-	pwd = '12346'
+	pwd = '123456'
 	name1 = 'xiaoming'
 	name2 = 'xiaohong'
 	u1 = User.objects.filter(username=name1)
