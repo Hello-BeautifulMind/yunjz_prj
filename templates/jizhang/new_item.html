@@ -1,0 +1,73 @@
+{% extends "base_yunjz.html" %}
+{% load static from staticfiles %}
+{% block title %}新建/编辑收支{% endblock %}
+{% block extra_head %}
+	<script type="text/javascript" src="{% static 'custom_js/new_item.js' %}"></script>
+{% endblock %}
+
+{% block title-panel %}
+	{% include "title-panel.html" %}
+{% endblock %}
+{% block siderbar %}
+	{% include "siderbar.html" %}
+{% endblock %}
+
+{% block content %}
+<div class="col-xs-12 col-sm-10" id="content">
+	<div class="text-center">
+		<div id="prompt-info" class="alert alert-warning">
+			保存成功！
+		</div>
+	</div>
+	<form method="post" action="" class="form-horizontal" style="margin-top: 100px;">
+		{% csrf_token %}
+		<div class="form-group">
+			<label for="id_pub_date" class="col-sm-2 control-label"><strong>* </strong>日 期</label>
+			<div class="col-sm-4">
+				{{ form.pub_date }}
+			</div>
+			<div class="col-sm-2 wrapper-info">
+				<div class="alert alert-warning field-warning" id="pub_date-error">
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="id_category" class="col-sm-2 control-label"><strong>* </strong>分 类</label>
+			<div class="col-sm-4">
+				{{ form.category }}
+			</div>
+
+			<div class="col-sm-2 wrapper-info">
+				<div class="alert alert-warning field-warning" id="category-error" >
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="id_price" class="col-sm-2 control-label"><strong>* </strong>金 额</label>
+			<div class="col-sm-4">
+				{{ form.price }}
+			</div>
+			<div class="col-sm-2 wrapper-info">
+				<div class="alert alert-warning field-warning" id="price-error">
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="id_comment" class="col-sm-2 control-label">注 释</label>
+			<div class="col-sm-4">
+				{{ form.comment }}
+			</div>
+			<div class="col-sm-2 wrapper-info">
+				<div class="alert alert-warning field-warning" id="comment-error">
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-3 col-sm-offset-2">
+				<button type="button" class="btn btn-primary" id="submit-btn"><span class="glyphicon glyphicon-ok"></span> 提交</button>
+				<button type="button" class="btn btn-primary" onclick="javascript:window.location.href='{% url "jizhang:items" %}'"><span class="glyphicon glyphicon-arrow-left"></span> 返回</button>
+			</div>
+		</div>
+	</form>
+</div>	
+{% endblock %}

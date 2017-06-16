@@ -1,0 +1,5 @@
+Django==1.11.1
+PyMySQL==0.7.11
+pytz==2017.2
+uWSGI==2.0.15
+xlwt==1.2.0

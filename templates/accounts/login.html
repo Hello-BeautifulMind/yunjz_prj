@@ -1,0 +1,58 @@
+{% extends "base_yunjz.html" %}
+{% load static from staticfiles %}
+{% block title %}登录{% endblock %}
+{% block extra_head %}
+	<link rel="stylesheet" href="{% static 'custom_css/login.css' %}">
+	<script type="text/javascript" src="{% static 'custom_js/login.js' %}"></script>
+{% endblock %}
+{% block content %}
+	<div class="col-sm-1 col-md-2 col-lg-3"></div>
+	<div class="col-xs-12 col-sm-10 col-md-8 col-lg-6">
+		<h3 class="text-center">欢迎来到BeautifulGirl记账站点!</h3>
+		<div class="text-center wrapper-info">
+			<div id="loging-warning" class="alert alert-warning">
+				<!-- 错误提示 -->
+			</div>
+		</div>
+		<form action="" method="post" class="form-horizontal">
+			{% csrf_token %}
+			<div class="form-group has-feedback">
+				<label for="id_username" class="col-sm-2 control-label" style="padding-left: 5px;">Username</label>
+				<div class="col-sm-7">
+					<span class="glyphicon glyphicon-user form-control-feedback"></span>
+					<input id="id_username" class="form-control" name="username" type="text" value="{{username}}" />
+				</div>
+			</div>
+			<div class="form-group has-feedback">
+				<label for="id_password" class="col-sm-2 control-label" style="padding-left: 5px;">Password</label>
+				<div class="col-sm-7">
+					<span class="glyphicon glyphicon-lock form-control-feedback"></span>
+					<input id="id_password" class="form-control" name="password" type="password" value="{{password}}"/>
+				</div>
+			</div>
+			<div class="form-group">
+			    <div class="col-sm-offset-2 col-sm-4">
+			      <div class="checkbox">
+			        <label>
+			          <input type="checkbox"> Remember me
+			        </label>
+			      </div>
+			    </div>
+		  	</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-4">
+					<button type="button" class="btn btn-default" id="login-btn"><span class="glyphicon glyphicon-log-in"></span> Sign in</button>
+				</div>
+			</div>
+		</form>
+		<div class="col-sm-offset-3 col-sm-4" style="padding: 0;">
+			<a href="{% url 'accounts:register' %}"><strong>加入我们</strong></a><span>，在这里你可以：</span>
+			<ul>
+		        <li>随时随地通过网络记账</li>
+		        <li>统计分析自己每月收支</li>
+		        <li>导出表格进行备份</li>
+		        <li>导入以前记录的表格</li>
+		    </ul>
+	    </div>
+    </div>
+{% endblock %}

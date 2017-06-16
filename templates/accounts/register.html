@@ -1,0 +1,90 @@
+
+{% extends "base_yunjz.html" %}
+{% load static from staticfiles %}
+{% block title %}注册{% endblock %}
+{% block extra_head %}
+	<script type="text/javascript" src="{% static 'custom_js/register.js' %}"></script>
+	<style type="text/css">
+		.form-group button {
+		    margin-right: 20px;
+		    padding: 6px 18px;
+		}
+	    .error-info {
+	    	color: #ff0000;
+	    }
+	   strong {
+	    	color: #ff0000;
+	    	font-weight: 900;
+	    }
+	</style>
+{% endblock %}
+
+{% block content %}
+	<div class="col-md-1 col-lg-2"></div>
+	<div class="col-xs-12 col-sm-12 col-md-10 col-lg-8" id="content">
+		<h3 class="text-center" style="margin:50px 0 20px;">注册成为我们的一员吧</h3>
+		<div class="text-center">
+			<div id="prompt-info" class="alert alert-warning" style="margin-left: -70px; margin-top: -90px;">
+				用户注册成功！
+			</div>
+		</div>
+		<form action="" method="post" class="form-horizontal">
+			{% csrf_token %}
+			<div class="form-group">
+				<label for="id_username" class="col-sm-3 control-label"><strong>* </strong>昵 称</label>
+				<div class="col-sm-6">
+					{{ form.username }}
+				</div>
+				<div class="col-sm-3 wrapper-info">
+					<div id="username-error" class="alert alert-warning field-warning">
+					<!-- 错误提示 -->
+					</div>
+				</div>
+			</div>	
+			
+			<div class="form-group">
+				<label for="id_email" class="col-sm-3 control-label">邮 箱</label>
+				<div class="col-sm-6">
+					{{ form.email }}
+				</div>
+				<div class="col-sm-3 wrapper-info">
+					<div id="email-error" class="alert alert-warning field-warning">
+					<!-- 错误提示 -->
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="id_password" class="col-sm-3 control-label"><strong>* </strong>密 码</label>
+				<div class="col-sm-6">
+					{{ form.password }}
+				</div>
+				<div class="col-sm-3 wrapper-info">
+					<div id="password-error" class="alert alert-warning field-warning">
+					<!-- 错误提示 -->
+					</div>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label for="id_re_password" class="col-sm-3 control-label"><strong>* </strong>重 复 密 码</label>
+				<div class="col-sm-6">
+					{{ form.re_password }}
+				</div>
+				<div class="col-sm-3 wrapper-info">
+					<div id="re_password-error" class="alert alert-warning field-warning">
+					<!-- 错误提示 -->
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="col-sm-8 col-sm-offset-3">
+					<button type="button" class="btn btn-default" id="reg-btn" style="background-color: #36B46D; color:#FFF;">Sign up</button>
+					<span style="margin-left: 100px; color: #888;">Already have an account?<a href="{% url 'accounts:login' %}">&nbsp;Sign in</a></span>
+				</div>
+			</div>
+		</form>
+	</div>
+{% endblock %}
+

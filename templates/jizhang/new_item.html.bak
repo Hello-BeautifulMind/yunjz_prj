@@ -1,0 +1,48 @@
+{% extends "base_yunjz.html" %}
+
+{% block title %}新建/编辑收支{% endblock %}
+
+{% block content %}
+	{% include "welcome.html" %}
+
+	<form method="post" action="" class="form-horizontal">
+		{% csrf_token %}
+		<div class="form-group">
+			<label for="pub_date" class="col-sm-2 col-sm-offset-2 control-label">日期</label>
+			<div class="col-sm-4">
+				<input type="text" class="form-control" id="pub_date" placeholder="日期" />
+			</div>
+			<div class="col-sm-2">
+				<p style="margin-top:3px">错误</p>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="category" class="col-sm-2 col-sm-offset-2 control-label">分类</label>
+			<div class="col-sm-4">
+				<select class="form-control" id="category">
+					<option selected>家庭收入</option>
+					<option>工资收入</option>
+					<option>股权收入</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="price" class="col-sm-2 col-sm-offset-2 control-label">金钱</label>
+			<div class="col-sm-4">
+				<input type="text" id="price" class="form-control" placeholder="金钱" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="comment" class="col-sm-2 col-sm-offset-2 control-label">注释</label>
+			<div class="col-sm-4">
+				<input type="text" id="comment" class="form-control" placeholder="注释" />
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-2 col-sm-offset-5">
+				<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span> 提交</button>
+				<button type="button" class="btn btn-primary" onclick="javascript:window.location.href='{% url "jizhang:items" %}'"><span class="glyphicon glyphicon-arrow-left"></span> 返回</button>
+			</div>
+		</div>
+	</form>
+{% endblock %}

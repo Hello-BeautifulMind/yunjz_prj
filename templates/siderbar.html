@@ -1,0 +1,17 @@
+<!-- 导航信息 -->
+<div id="siderbar" class="col-xs-2 col-sm-2 hidden-xs hidden-sm">
+	<!-- 头像显示 -->
+	<div class="profile-photo-container" style="height: 84px; padding: 10px 0; position: relative;border-bottom: 1px solid #ECECEC;">
+		<img class="img-responsive" src="/static/images/Happy_SantaClaus.png" alt="Profile Photo" style="width: 64px; height: 64px;">
+		<h5 style="position: absolute; top:24px;left:70px">Hello，<a href="#">{{ request.user }}</a></h5>
+	</div>
+	<nav class="left-nav">          
+      <ul>
+        <li style="background-color: #F9F9F9;"><a href="#"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a></li>
+        <li><a href="{% url 'jizhang:categories' %}" id="categories"><span class="glyphicon glyphicon-th"></span> 账单分类</a></li>
+        <li><a href="{% url 'jizhang:items' %}" id="items"><span class="glyphicon glyphicon-list-alt"></span> 账单明细</a></li>
+      </ul>  
+	</nav>
+	
+</div>
+<div class="col-xs-2 col-sm-2 hidden-xs hidden-sm" style="height: "></div>

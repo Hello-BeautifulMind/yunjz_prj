@@ -1,0 +1,128 @@
+{% extends "base_yunjz.html" %}
+{% load static from staticfiles %}
+
+{% block title %}收支列表{% endblock %}
+{% block extra_head %}
+	<script>
+		var ITEMS_URL = "{% url 'jizhang:items' %}";
+		var FIND_ITEMS_URL = "{% url 'jizhang:find_items' %}";
+		var EXPORT_EXCEL_URL = "{% url 'jizhang:export_excel' %}";
+		var EDIT_ITEM_URL = "{% url 'jizhang:edit_item' 0 %}";
+		var EDIT_CATEGORY_URL = "{% url 'jizhang:edit_category' 0 %}";
+		var NO_DATA_IMG_URL = "{% static 'images/no-data.jpg' %}";
+	</script>
+	<script type="text/javascript" src="{% static 'custom_js/items.js' %}"></script>
+	<style>
+		.search {
+			margin-right: 20px;
+		}
+		#loading {
+			position: absolute;
+		}
+		.pagination {
+			padding-left: 180px;
+		}
+	</style>
+{% endblock %}
+
+{% block title-panel %}
+	{% include "title-panel.html" %}
+{% endblock %}
+{% block siderbar %}
+	{% include "siderbar.html" %}
+{% endblock %}
+{% block content %}
+	<div class="col-xs-12 col-sm-10" id="content">
+		<div id="loading" style="display: none;">
+			<img src="{% static 'images/data-loading.gif' %}" alt="加载中..." />
+		</div>
+		<div class="text-align wrapper-info col-sm-12">
+			<div id="del-warning" class="alert alert-warning">
+				删除的分类不能包含子类或者没有账单绑定
+			</div>
+		</div>
+		<div class="search-form">
+			<form class="form-inline">
+				<div class="form-group">
+					<label for="category-search">分 类 </label>
+					<select class="form-control search" id="category-search" style="width:200px;" />
+						<option value="0" selected="selected">-----</option>
+						{% for c in categories %}
+							<option value="{{ c.id }}">{{ c.name }}</option>
+						{% endfor %}
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="date-search">时 间 </label>
+					<input type="text" class="form-control search" id="date-search" placeholder="日期" style="width:200px;" />
+				</div>
+				<!-- <button type="button" class="btn btn-primary search" id="search-btn">查 询</button> -->
+				<!-- return false; 阻止a标签默认行为 -->
+				<a href="#" class="btn btn-primary search" id="search-btn" onclick="return false;" onfocus="this.blur();">查 询</a>
+				<button type="button" class="btn btn-primary search" id="reset-btn">重 置</button>
+			</form>
+		</div>
+		<div class="btn-group btn-group-justified">
+			<a href="{% url 'jizhang:new_item' %}" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> 新建</a>
+			<a href="javascript:void(0);" class="btn btn-primary" id="export-excel" ><span class="glyphicon glyphicon-export"></span> 导出</a>
+			<a href="#" class="btn btn-primary"><span class="glyphicon glyphicon-import"></span> 导入</a>
+			<a data-toggle="modal" data-target="#myModal" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> 删除</a>
+		</div>
+		<form method="post" action="">
+			{% csrf_token %}
+			<table class="table table-striped">
+				<thead>
+					<tr class="info">
+						<td data-toggle="tooltip" data-placement="left" title="按时间排序"><strong><a href="{% url 'jizhang:items' %}">时间</a></strong></td>
+						<td data-toggle="tooltip" data-placement="left" title="按价格排序">金额(元)</td>
+						<td>分类</td>
+						<td>备注</td>
+						<td><strong><input type="checkbox" id="all" /> 全选</strong></td>
+					</tr>
+				</thead>
+				
+				<tbody id="items-info">
+				{% if items %}
+					{% for item in items|dictsortreversed:"pub_date" %}
+						<tr id="item{{ item.id }}">
+							<td data-toggle="tooltip" data-placement="top" title="编辑该账单"><a href="{% url 'jizhang:edit_item' item.id %}">{{ item.pub_date|date:"Y-m-d"}}</a></td>
+							<td data-toggle="tooltip" data-placement="top" title="编辑该账单"><a href="{% url 'jizhang:edit_item' item.id %}">{{ item.price }}</a></td>
+							<td data-toggle="tooltip" data-placement="left" title="显示该分类下的账单"><a href="{% url 'jizhang:edit_category' item.category.id %}">{{ item.category }}</a></td>
+							<td>{{ item.comment }}</td>
+							<td><input type="checkbox" name="del_id" value="{{ item.id }}" autocomplete="off"/></td>
+						</tr>
+					{% endfor %}
+				{% else %}
+					<!-- <tr><td>没有可用账单</td></tr> -->
+					<tr><td colspan="5" style="text-align: center; background-color: #F5F5F5;"><img src="{% static 'images/no-data.jpg' %}" alt='暂无数据' /></td></tr>
+				{% endif %}
+				</tbody>
+			</table>
+		
+			{% include "jizhang/delete_modal.html" %}
+		</form>
+		<!-- 分页 -->
+		<nav aria-label="Page navigation" style="text-align: center;">
+			<ul class="pagination">
+				{% if pages_num > 0 %}
+					<li class="page-turn"><a href="" class="btn btn-primary disabled" onclick="get_page(this.href); return false;"  onfocus="this.blur();" id="prev-page"><span>&laquo;</span></a></li>
+					<script>
+						for(var i=1; i<="{{pages_num}}" && i<12; i++) {
+							var active_class = 1==i ? "active" : "";
+							if(i == 11 && "{{ pages_num }}" > 10) {
+								var li_node = '<li id="omit-page"><span>...</span></li>'
+							}
+							else {
+								var li_node = '<li class="' + active_class + '"><a href="?page=' + i + '" onclick="get_page(this.href); return false;" onfocus="this.blur();">' + i + '</a></li>'  
+							}
+							$(".pagination:first").append(li_node);
+						}
+					</script>
+					<li class="page-turn"><a href="?page=2" id="next-page" {% if pages_num <= 1 %} class= 'btn btn-primary disabled' {% else %} class= "btn btn-primary" {% endif %} onclick="get_page(this.href); return false;" onfocus="this.blur();"><span>&raquo;</span></a></li>
+
+					<li class="page-turn"><span style="border:none; margin-left:20px; color:#999;">共<em id="pages-num">{{pages_num}}</em>页，到第</span><input type="text" id="skip-page" style="position:relative; float:left; margin-top: 1px; width: 40px; height:30px; border: 1px solid #ddd;" value="1" /><span style="border:none; padding-left:5px; color:#999;">页</span><a href="?page=" id="gogo" onclick="skip_page(this.href); return false;" onfocus="this.blur();">跳转</a><span id="input-error" style="visibility: hidden; color: red; border:none;">请输入一个大于0的数字</span></li>
+				{% endif %}
+			</ul>
+		</nav>
+	</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>{% block title %}爱记账{% endblock %}</title>     
+        <link rel="stylesheet" href="{% static 'libs/bootstrap/css/bootstrap.min.css' %}">
+        <script src="{% static 'libs/jquery.min.js' %}"></script>
+        <script src="{% static 'libs/jquery-ui.min.js' %}"></script>
+        <link rel="stylesheet" href="{% static 'custom_css/global.css' %}">
+        <script type="text/javascript" src="{% static 'custom_js/global.js' %}"></script>
+        {% block extra_head %}{% endblock %}
+    </head>
+    <body>
+    	<div class="container-fluid">
+    		{% block title-panel %}{% endblock %}
+    		<div class="row">
+    			{% block siderbar %}{% endblock %}
+        		{% block content %}{% endblock %}
+        	</div>
+        </div>
+        {% include "footer.html" %}
+        <script src="{% static 'libs/bootstrap/js/bootstrap.min.js' %}"></script>
+    </body>
+</html>

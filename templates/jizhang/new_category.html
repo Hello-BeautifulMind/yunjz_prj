@@ -1,0 +1,69 @@
+{% extends "base_yunjz.html" %}
+{% load static from staticfiles %}
+{% block title %}新建/编辑分类{% endblock %}
+
+{% block extra_head %}
+	<script type="text/javascript" src="{% static 'custom_js/new_category.js' %}"></script>
+	<style type="text/css">
+		
+	    .error-info {
+	    	color: #ff0000;
+	    }
+	    
+	</style>
+{% endblock %}
+
+{% block title-panel %}
+	{% include "title-panel.html" %}
+{% endblock %}
+{% block siderbar %}
+	{% include "siderbar.html" %}
+{% endblock %}
+{% block content %}
+<div class="col-xs-12 col-sm-10" id="content">
+	<div class="text-center">
+		<div id="prompt-info" class="alert alert-warning">
+			保存成功！
+		</div>
+	</div>
+	<form action="" method="post" class="form-horizontal" style="margin-top: 100px;">
+		{% csrf_token %}
+		<div class="form-group">
+			<label for="id_category_name" class="col-sm-2 control-label"><strong>* </strong>类 别 名 称</label>
+			<div class="col-sm-4">
+				{{ form.category_name }}
+			</div>
+			<div class="col-sm-2 wrapper-info">
+				<div class="alert alert-warning field-warning" id="category_name-error">
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="id_p_category" class="col-sm-2 control-label"><strong>* </strong>父 类 名 称</label>
+			<div class="col-sm-4">
+				{{ form.p_category }}
+			</div>
+			<div class="col-sm-2 wrapper-info">
+				<div class="alert alert-warning field-warning" id="p_category-error">
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="id_isIncome" class="col-sm-2 control-label"><strong>* </strong>收 入/支 出</label>
+			<div class="col-sm-4">
+				{{ form.isIncome }}
+			</div>
+			<div class="col-sm-2 wrapper-info">
+				<div class="alert alert-warning field-warning" id="isIncome-error">
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-3 col-sm-offset-2">
+				<button type="button" class="btn btn-primary" id="submit-btn"><span class="glyphicon glyphicon-ok"></span> 提交</button>
+				<button type="button" class="btn btn-primary" onclick="javascript:window.location.href='{% url "jizhang:categories" %}'"><span class="glyphicon glyphicon-arrow-left"></span> 返回</button>
+			</div>
+		</div>
+	</form>
+</div>
+{% endblock %}

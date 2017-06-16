@@ -1,0 +1,20 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+	<!-- Brand -->
+	<div class="container-fluid" style="height: 50px; background-color: #378CBE;">
+		<div class="col-sm-2" id="nav-brand"><h4>Cloud bookkeeping</h4></div>
+		<div class="col-sm-10">
+			<ul class="nav navbar-nav navbar-right">
+		        <li><a href="#"><span class="glyphicon glyphicon-envelope" style="color: white;display: inline-block; margin:0 5px;"></span></a></li>
+		        <li><span class="glyphicon glyphicon-user" style="color: white;display: inline-block; margin:0 5px;height: 50px;;line-height: 47px;"></span> </li>
+		        <li class="dropdown">
+		            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding-left:5px;">{{ request.user }} <span class="caret"></span></a>
+		          	<ul class="dropdown-menu">
+			            <li><a href="{% url 'accounts:modify_password' %}">修改密码</a></li>
+			            <li role="separator" class="divider"></li>
+			            <li><a href="{% url 'accounts:logout' %}">注销</a></li>
+		          	</ul>
+		        </li>
+		    </ul>
+		</div>
+	</div>
+</nav>

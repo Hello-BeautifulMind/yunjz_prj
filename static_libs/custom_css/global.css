@@ -1,0 +1,126 @@
+body {
+	background: #F4F4F4 none repeat scroll 0 0;
+}
+
+#login-btn, #reg-btn {
+	background-color: #36B46D; 
+	color:#FFF;
+}
+
+/*内容区*/
+#content {
+	background-color: #FBFBFB;
+}
+
+#content .form-group {
+	margin-bottom: 25px;
+}
+#content .form-group button {
+    margin-right: 20px;
+    padding: 6px 18px;
+}
+#content label strong {
+	color: #ff0000;
+	font-weight: 900;
+}
+
+/*提示框*/
+#loging-warning, #del-warning, #prompt-info, .field-warning { 
+	height: 30px;
+	padding: 0 4px;
+	line-height: 30px;
+	visibility: hidden;
+	display: inline-block;
+	font-size: 14px;
+} 
+.field-warning {
+	margin-bottom: 0;
+}
+/*与提示框配合使用，因为inline-block时其元素会和父元素有空隙，导致弹出信息框时输入框会错位*/
+.wrapper-info {
+	font-size: 0;
+	text-align: center;
+}
+
+#del-warning, #prompt-info {
+	position: fixed;
+	margin-top: 20px;
+	margin-left: -140px;
+	z-index: 1033;
+}
+
+.search-form {
+	margin: 70px auto 20px;
+}
+#content .search-form .form-inline .form-group {
+	margin-bottom: 0;
+}
+
+/*侧边栏*/
+#siderbar {
+	position: fixed; 
+	top:50px;
+}
+
+/*brand*/
+#nav-brand h4 {
+	height: 50px;
+	line-height: 50px;
+	color: white;
+    display: inline-block;
+    font-weight: 300;
+    margin: 0 5px;
+    vertical-align: middle;
+}
+
+.navbar-fixed-top .navbar-right li a{
+	color: white;
+}
+
+.navbar-fixed-top .navbar-right .dropdown-menu li a{
+	color: #777;
+}
+
+/*侧边栏*/
+nav .left-nav {
+	display: block;
+}
+#siderbar nav ul{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+#siderbar nav ul a{
+	padding: 12px 0;
+	display: block;
+	border-bottom: 1px solid #ececec;
+}
+
+#siderbar nav ul a:hover, a:active {
+	text-decoration: none;
+	background-color: #E2E2E2;
+}
+
+/*页脚样式*/
+#footer {			
+	font-size: 12px;
+	border-top: 1px solid #ebebeb;
+	text-align: center;
+	color: #888;
+	padding: 40px 0 0;
+}
+#footer a{
+	color: #900b09;
+}
+#footer a:hover{
+	text-decoration: none;
+	color: #ff0000;
+}
+
+/* 动态为footer添加类fixed-bottom */
+.fixed-bottom {
+	position: fixed;
+	bottom: 0;
+	width:100%;
+}
