@@ -35,30 +35,59 @@
    打开命令行，进入到保存项目的文件夹，输入如下命令：
 
    ```
-   git clone https://github.com/Hello-BeautifulWorld/MyProject.git
+   git clone https://github.com/Hello-BeautifulWorld/yunjz_prj.git
    ```
  2. 创建并激活虚拟环境
 
    在命令行进入到保存虚拟环境的文件夹，输入如下命令创建并激活虚拟环境：
 
    ```
-   virtualenv blogproject_env
+   python -m venv yunjz_venv
 
    # windows
-   blogproject_env\Scripts\activate
+   yunjz_env\Scripts\activate
 
    # linux
-   source blogproject_env/bin/activate
+   source yunjz_env/bin/activate
    ```
 
-   关于如何使用虚拟环境，参阅：[搭建开发环境](http://zmrenwu.com/post/3/) 的 Virtualenv 部分。如果不想使用虚拟环境，可以跳过这一步。
+   如果不想使用虚拟环境，可以跳过这一步。
    
-### 示例
+ 3. 安装项目依赖
+
+   如果使用了虚拟环境，确保激活并进入了虚拟环境，在命令行进入项目所在的 yunjz_prj 文件夹，运行如下命令：
+
+   ```
+   pip install -r requirements.txt
+   ```
+ 4. 数据库迁移
+
+   在上一步所在的位置运行如下命令迁移数据库：
+
+   ```
+   python manage.py migrate
+   ```
+ 5. 创建后台管理员账户
+
+   在上一步所在的位置运行如下命令创建后台管理员账户
+
+   ```
+   python manage.py createsuperuser
+   ```
+ 6. 启动应用服务器
+
+   在上一步所在的位置运行如下命令开启开发服务器：
+
+   ```
+   python manage.py runserver
+   ```
+7. 注册用户登录账单管理页面
+
+   在浏览器输入：127.0.0.1:8000/accounts
+
+### 演示地址
 -----------
-1. 下载文件<br>
-命令：get example.avi<br> 
-[客户端下载](/images/client.png)<br>
-[服务端信息](/images/server.png)
+[演示地址](http://www.letmego.me/accounts)
 
 
 
