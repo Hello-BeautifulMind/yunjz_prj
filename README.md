@@ -41,17 +41,17 @@
 
     在命令行进入到保存虚拟环境的文件夹，输入如下命令创建并激活虚拟环境：
 
-   ```
-   python -m venv yunjz_venv
+    ```
+    python -m venv yunjz_venv
 
-   # windows
-   yunjz_env\Scripts\activate
+    # windows
+    yunjz_env\Scripts\activate
 
-   # linux
-   source yunjz_venv/bin/activate
-   ```
+    # linux
+    source yunjz_venv/bin/activate
+    ```
 
-   如果不想使用虚拟环境，可以跳过这一步。
+    如果不想使用虚拟环境，可以跳过这一步。
    
  3. 安装项目依赖
 
@@ -64,23 +64,23 @@
 
     在上一步所在的位置运行如下命令迁移数据库：
 
-   ```
-   python manage.py migrate
-   ```
+    ```
+    python manage.py migrate
+    ```
  5. 创建后台管理员账户
 
     在上一步所在的位置运行如下命令创建后台管理员账户
 
-   ```
-   python manage.py createsuperuser
-   ```
+    ```
+    python manage.py createsuperuser
+    ```
  6. 启动应用服务器
 
     在上一步所在的位置运行如下命令开启开发服务器：
 
-   ```
-   python manage.py runserver 0.0.0.0:8000
-   ```
+    ```
+    python manage.py runserver 0.0.0.0:8000
+    ```
 7. 注册用户登录账单管理页面(假设服务器地址是192.168.1.240)
 
    在浏览器输入：192.168.1.240:8000/accounts进行用户注册和登录
