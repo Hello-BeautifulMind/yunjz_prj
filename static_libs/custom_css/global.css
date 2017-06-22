@@ -27,7 +27,7 @@ body {
 /*提示框*/
 #loging-warning, #del-warning, #prompt-info, .field-warning { 
 	height: 30px;
-	padding: 0 4px;
+	padding: 0 8px;
 	line-height: 30px;
 	visibility: hidden;
 	display: inline-block;
@@ -35,6 +35,7 @@ body {
 } 
 .field-warning {
 	margin-bottom: 0;
+	float: left;
 }
 /*与提示框配合使用，因为inline-block时其元素会和父元素有空隙，导致弹出信息框时输入框会错位*/
 .wrapper-info {

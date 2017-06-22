@@ -8,7 +8,7 @@
 {% block content %}
 	<div class="col-sm-1 col-md-2 col-lg-3"></div>
 	<div class="col-xs-12 col-sm-10 col-md-8 col-lg-6">
-		<h3 class="text-center">欢迎来到BeautifulGirl记账站点!</h3>
+		<h3 class="text-center">欢迎来到BeautifulMind记账站点!</h3>
 		<div class="text-center wrapper-info">
 			<div id="loging-warning" class="alert alert-warning">
 				<!-- 错误提示 -->
@@ -20,16 +20,38 @@
 				<label for="id_username" class="col-sm-2 control-label" style="padding-left: 5px;">Username</label>
 				<div class="col-sm-7">
 					<span class="glyphicon glyphicon-user form-control-feedback"></span>
-					<input id="id_username" class="form-control" name="username" type="text" value="{{username}}" />
+					<input id="id_username" class="form-control" name="username" type="text" value="{{username}}" placeholder="请输入用户名" />
+				</div>
+				<div class="col-sm-3 wrapper-info">
+					<div id="username-error" class="alert alert-warning field-warning">
+					<!-- 错误提示 -->
+					</div>
 				</div>
 			</div>
 			<div class="form-group has-feedback">
 				<label for="id_password" class="col-sm-2 control-label" style="padding-left: 5px;">Password</label>
 				<div class="col-sm-7">
 					<span class="glyphicon glyphicon-lock form-control-feedback"></span>
-					<input id="id_password" class="form-control" name="password" type="password" value="{{password}}"/>
+					<input id="id_password" class="form-control" name="password" type="password" value="{{password}}" placeholder="请输入密码"/>
+				</div>
+				<div class="col-sm-3 wrapper-info">
+					<div id="password-error" class="alert alert-warning field-warning">
+					<!-- 错误提示 -->
+					</div>
 				</div>
 			</div>
+			<div class="form-group">
+				<label for="captcha" class="col-sm-2 control-label" style="padding-left: 5px;">Captcha</label>
+			    <div class="col-sm-7">
+			    	<input id="id_captcha" class="form-control" name="captcha" type="text" style="width:215px; float:left;" placeholder="请输入验证码" />
+			    	<img onclick="this.setAttribute('src','/accounts/captcha/?nocache='+Math.random());" src="/accounts/captcha/" alt="Captcha" style="height: 34px; float: left; margin-left: 10px;" />
+			    </div>
+			    <div class="col-sm-3 wrapper-info">
+					<div id="captcha-error" class="alert alert-warning field-warning">
+					<!-- 错误提示 -->
+					</div>
+				</div>
+		  	</div>
 			<div class="form-group">
 			    <div class="col-sm-offset-2 col-sm-4">
 			      <div class="checkbox">

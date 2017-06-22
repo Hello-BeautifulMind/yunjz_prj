@@ -1,4 +1,6 @@
 Django==1.11.1
+olefile==0.44
+Pillow==4.1.1
 PyMySQL==0.7.11
 pytz==2017.2
 uWSGI==2.0.15

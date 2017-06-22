@@ -14,17 +14,27 @@ $(function() {
 	}
 
 	$("#login-btn").click(function() {
+		$.each($(".field-warning"), function(i, item) {
+			$(item).css("visibility", "hidden");// 先把错误字段隐藏，防止已通过的字段还出现上一次的错误
+		});
 		var uname = $("#id_username").val();
 		var pwd = $("#id_password").val();
-		if(uname == "" || pwd == "") {
-			$("#loging-warning").css("visibility", "visible");
-			$("#loging-warning").html("账号和密码不能为空!");
-			setTimeout(function() {$("#loging-warning").css("visibility", "hidden");}, 3000);
-			if(uname == "") {
-				$("#id_username").focus();
+		var captcha = $("#id_captcha").val();
+		if(uname == "" || pwd == "" || captcha == "") {
+			if(captcha == "") {
+				$("#captcha-error").html("请输入验证码");
+				$("#captcha-error").css("visibility", "visible");
+				$("#id_captcha").focus();
 			}
-			else {
+			if(pwd == "") {
+				$("#password-error").html("请输入密码");
+				$("#password-error").css("visibility", "visible");
 				$("#id_password").focus();
+			}
+			if(uname == "") {
+				$("#username-error").html("请输入用户名");
+				$("#username-error").css("visibility", "visible");
+				$("#id_username").focus();
 			}
 			
 		}
@@ -34,19 +44,26 @@ $(function() {
 				url: "/accounts/login/",
 				dataType: "json",
 				method: "POST",
-				data: {"csrfmiddlewaretoken": csrf_token, "username": uname, "password": pwd},
-				success: function(is_auth) {
-					if(is_auth) {
+				data: {"csrfmiddlewaretoken": csrf_token, "username": uname, "password": pwd, "captcha": captcha},
+				success: function(auth) {
+					if(auth[0]) {
 						if($(":checkbox").get(0).checked) {
 							setCookie("username", uname, 2);	// 保留2天
 						}
 						window.location.href = "/accounts/index";
 					}
 					else {
-						$("#loging-warning").css("visibility", "visible");
-						$("#loging-warning").html("账号或者密码输入错误!");
-						setTimeout(function() {$("#loging-warning").css("visibility", "hidden");}, 3000);
-						$("#id_username").focus();
+						if(auth[1] == "user_auth_failed") {
+							$("#loging-warning").css("visibility", "visible");
+							$("#loging-warning").html("账号或者密码输入错误!");
+							setTimeout(function() {$("#loging-warning").css("visibility", "hidden");}, 3000);
+							$("#id_username").focus();
+						}
+						else if(auth[1] == "auth_code_failed"){
+							$("#captcha-error").html("验证码输入错误");
+							$("#captcha-error").css("visibility", "visible");
+							$("#id_captcha").focus();
+						}
 					}
 				}
 			});
