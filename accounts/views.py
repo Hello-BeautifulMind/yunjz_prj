@@ -122,7 +122,7 @@ def get_verification_code(request):
 	buffer = f.read()
 	f.close()
 	try:
-		os.remove(img_name + ".png")		# 异常本地的验证码图片
+		os.remove(img_name + ".png")		# 移除本地的验证码图片
 		print("验证码图片'{}.png'已被移除".format(img_name))
 	except FileNotFoundError:
 		pass
