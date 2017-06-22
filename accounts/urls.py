@@ -23,6 +23,7 @@ urlpatterns = [
 	url(r'^index/', views.index, name='index'),
 	url(r'^login/', views.login, name='login'),
 	url(r'^logout/', views.logout, name='logout'),
+	url(r'^captcha/', views.get_verification_code, name='get_verification_code'),
 	url(r'^register/', views.register, name='register'),
 	url(r'^modify_password/', views.modify_password, name='modify_password'),
 ]
