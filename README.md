@@ -87,7 +87,7 @@
 
 ### 项目演示
 -----------
-[项目演示](http://www.letmego.me/accounts/login) (测试账号：xiaoming 密码：123456)
+[项目演示](http://www.letmego.me/accounts) (测试账号：xiaoming 密码：123456)
 
 
 
